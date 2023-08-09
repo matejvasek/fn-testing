@@ -1,0 +1,15 @@
+name: A Workflow
+
+on: [pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: A Step
+        env:
+          A: ${{ github.event.pull_request }}
+        run: echo $A; set
+
+
