@@ -10,6 +10,6 @@ jobs:
       - name: A Step
         env:
           A: ${{ github.event.pull_request.head.ref }}
-        run: echo $A
+        run: echo $A; set
 
 
