@@ -6,3 +6,4 @@ image: ""
 created: 2023-04-27T22:26:03.831129672+02:00
 build:
   pvcSize: 256Mi
+  builder: s2i
