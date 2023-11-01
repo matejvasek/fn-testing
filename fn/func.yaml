@@ -1,0 +1,18 @@
+specVersion: 0.35.0
+name: fn
+runtime: typescript
+registry: ttl.sh/yywnteephuzsquiohvlpqmtyllqboihz
+image: ttl.sh/yywnteephuzsquiohvlpqmtyllqboihz/fn:latest
+created: 2023-11-01T20:37:23.716758929+01:00
+invoke: cloudevent
+build:
+  git:
+    url: https://github.com/matejvasek/fn-testing
+    revision: subdir
+    contextDir: fn
+  builder: s2i
+  buildEnvs:
+  - name: BP_NODE_RUN_SCRIPTS
+    value: build
+deploy:
+  remote: true
