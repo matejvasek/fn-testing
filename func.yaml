@@ -1,0 +1,11 @@
+specVersion: 0.36.0
+name: fn-go
+runtime: go
+registry: registry.default.svc.cluster.local:5000
+namespace: default
+created: 2024-08-28T09:28:06.514772136+02:00
+build:
+  builder: pack
+deploy:
+  namespace: default
+  image: registry.default.svc.cluster.local:5000/fn-go:latest
