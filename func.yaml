@@ -1,0 +1,7 @@
+# $schema: https://raw.githubusercontent.com/knative/func/release-1.21/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/release-1.21/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: fn-js
+runtime: node
+created: 2026-02-05T15:06:37.700899172+01:00
+invoke: cloudevent
