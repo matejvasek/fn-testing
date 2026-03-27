@@ -1,29 +1,91 @@
-# Python HTTP Function
+# Function project
 
-Welcome to your new Python function project! The boilerplate function
-code can be found in [`func.py`](./func.py). This function will respond
-to incoming HTTP GET and POST requests.
+Welcome to your new Quarkus function project!
 
-## Endpoints
+This sample project contains a single function: `functions.Function.function()`,
+the function just returns its argument.
 
-Running this function will expose three endpoints.
+## Local execution
+Make sure that `Java 11 SDK` is installed.
 
-  * `/` The endpoint for your function.
-  * `/health/readiness` The endpoint for a readiness health check
-  * `/health/liveness` The endpoint for a liveness health check
+To start server locally run `./mvnw quarkus:dev`.
+The command starts http server and automatically watches for changes of source code.
+If source code changes the change will be propagated to running server. It also opens debugging port `5005`
+so debugger can be attached if needed.
 
-The health checks can be accessed in your browser at
-[http://localhost:8080/health/readiness]() and
-[http://localhost:8080/health/liveness]().
+To run test locally run `./mvnw test`.
 
-You can use `func invoke` to send an HTTP request to the function endpoint.
+## The `func` CLI
 
+It's recommended to set `FUNC_REGISTRY` environment variable.
+```shell script
+# replace ~/.bashrc by your shell rc file
+# replace docker.io/johndoe with your registry
+export FUNC_REGISTRY=docker.io/johndoe
+echo "export FUNC_REGISTRY=docker.io/johndoe" >> ~/.bashrc
+```
 
-## Testing
+### Building
 
-This function project includes a [unit test](./test_func.py). Update this
-as you add business logic to your function in order to test its behavior.
+This command builds OCI image for the function.
 
-```console
-python test_func.py
+```shell script
+func build
+```
+
+By default, JVM build is used.
+To enable native build set following environment variables to `func.yaml`:
+```yaml
+buildEnvs:
+- name: BP_NATIVE_IMAGE
+  value: "true"
+
+```
+
+### Running
+
+This command runs the func locally in a container
+using the image created above.
+```shell script
+func run
+```
+
+### Deploying
+
+This commands will build and deploy the function into cluster.
+
+```shell script
+func deploy # also triggers build
+```
+
+## Function invocation
+
+Do not forget to set `URL` variable to the route of your function.
+
+You get the route by following command.
+```shell script
+func info
+```
+
+### cURL
+
+```shell script
+URL=http://localhost:8080/
+curl -v ${URL} \
+  -H "Content-Type:application/json" \
+  -d "{\"message\": \"$(whoami)\"}\""
+# OR
+URL="http://localhost:8080/?message=$(whoami)"
+curl -v ${URL}
+```
+
+### HTTPie
+
+```shell script
+URL=http://localhost:8080/
+http -v ${URL} \
+  message=$(whoami)
+# OR
+URL="http://localhost:8080/?message=$(whoami)"
+http -v ${URL}
 ```

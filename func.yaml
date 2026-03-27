@@ -1,11 +1,18 @@
-specVersion: 0.35.0
-name: fn-py
-runtime: python
-registry: registry.xvasek.cz/mvasek
-image: registry.xvasek.cz/mvasek/fn-py:latest
-created: 2023-04-27T22:26:03.831129672+02:00
+# $schema: https://raw.githubusercontent.com/knative/func/main/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/main/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: my-fn-2
+runtime: quarkus
+registry: localhost:5000/my-reg
+namespace: my-ns
+created: 2026-03-27T14:54:59.6212543Z
 build:
-  git:
-    url: https://github.com/matejvasek/fn-testing
-  builder: pack
-  pvcSize: 256Mi
+  buildEnvs:
+  - name: BP_NATIVE_IMAGE
+    value: "false"
+  - name: BP_JVM_VERSION
+    value: "21"
+  - name: MAVEN_S2I_ARTIFACT_DIRS
+    value: target/quarkus-app
+  - name: S2I_SOURCE_DEPLOYMENTS_FILTER
+    value: lib quarkus-run.jar app quarkus
