@@ -1,0 +1,7 @@
+# $schema: https://raw.githubusercontent.com/knative/func/release-1.21/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/release-1.21/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: fn-py
+runtime: python
+created: 2026-04-01T17:12:21.156810829+02:00
+invoke: cloudevent
