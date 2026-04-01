@@ -2,7 +2,7 @@ name: Func Deploy
 "on":
   push:
     branches:
-      - master
+      - test-py
 jobs:
   deploy:
     runs-on: ubuntu-latest
