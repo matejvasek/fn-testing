@@ -1,0 +1,8 @@
+# $schema: https://raw.githubusercontent.com/knative/func/main/schema/func_yaml-schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/knative/func/main/schema/func_yaml-schema.json
+specVersion: 0.36.0
+name: fn
+runtime: go
+registry: image-registry.openshift-image-registry.svc:5000/playground
+namespace: playground
+created: 2026-04-02T12:03:27.630087612Z
