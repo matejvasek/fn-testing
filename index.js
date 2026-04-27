@@ -26,6 +26,7 @@ const handle = async (context, body) => {
   if (context.method === 'POST') {
     return { body };
   } else if (context.method === 'GET') {
+    context.log.info('abc')
     // If the request is an HTTP GET, the context will include a query string, if it exists
     return {
       query: context.query,
