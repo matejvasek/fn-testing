@@ -14,10 +14,5 @@ jobs:
         with:
           kubeconfig: ${{ secrets.KUBECONFIG }}
           method: kubeconfig
-      - name: Install func cli
-        uses: functions-dev/action@main
-        with:
-          name: func
-          version: knative-v1.20.1
       - name: Deploy function
         run: func deploy --registry=${{ vars.REGISTRY_URL }} -v
