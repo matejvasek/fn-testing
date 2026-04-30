@@ -1,5 +1,5 @@
 /**
- * šč
+ * šč abc
  * Your HTTP handling function, invoked with each request. This is an example
  * function that echoes its input to the caller, and returns an error if
  * the incoming request is something other than an HTTP POST or GET.
