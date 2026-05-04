@@ -1,0 +1,27 @@
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - env:
+                KUBE_CA_CERT: ${{ secrets.KUBE_CA_CERT }}
+              name: Add cluster CA to trust store
+              run: if [ -n "$KUBE_CA_CERT" ]; then echo "$KUBE_CA_CERT" | sudo tee -a /etc/ssl/certs/ca-certificates.crt > /dev/null; fi
+            - name: Setup Kubernetes context
+              uses: azure/k8s-set-context@v4
+              with:
+                kubeconfig: ${{ secrets.KUBECONFIG }}
+                method: kubeconfig
+            - name: Install func cli
+              uses: functions-dev/action@main
+              with:
+                name: func
+                version: knative-v1.20.1
+            - name: Deploy function
+              run: func deploy --registry=${{ vars.REGISTRY_URL }} -v
+name: Func Deploy
+"on":
+    push:
+        branches:
+            - devel
